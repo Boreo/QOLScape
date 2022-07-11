@@ -26,14 +26,10 @@
 
 from time import time
 from modules.pixelcolour import getPixel
-from config import MainConfig as mcfg
 import pyautogui
 
 class Metronomer():
     """Object to find and store location and colour of the metronome overlay
-    
-    Args:
-        windowName (str)(optional): Name of Runelite window name. Defaults to "RuneLite".
     
     Attributes:
         x (int): the x position of metronome
@@ -48,8 +44,7 @@ class Metronomer():
     
     """
       
-    def __init__(self, windowName = "RuneLite"):
-        self.windowName = windowName
+    def __init__(self):
         self.x = None
         self.y = None
         self.colour = None
@@ -61,12 +56,8 @@ class Metronomer():
         return self.colour
     
     def getMetronome(self):
-        if mcfg.useWindow:
-            flick1 = pyautogui.locateOnWindow(".\\resources\\flick1.png", self.windowName, grayscale = True, confidence = .8)
-            flick2 = pyautogui.locateOnWindow(".\\resources\\flick2.png", self.windowName, grayscale = True, confidence = .8)
-        else:
-            flick1 = pyautogui.locateOnScreen(".\\resources\\flick1.png", grayscale = True, confidence = .8)
-            flick2 = pyautogui.locateOnScreen(".\\resources\\flick2.png", grayscale = True, confidence = .8)
+        flick1 = pyautogui.locateOnScreen(".\\resources\\flick1.png", grayscale = True, confidence = .8)
+        flick2 = pyautogui.locateOnScreen(".\\resources\\flick2.png", grayscale = True, confidence = .8)
             
         if flick1 != None:
             self.x = flick1[0]
@@ -92,7 +83,3 @@ class Metronomer():
 
     class CouldNotFind(Exception):
         pass
-        
-
-if __name__ == "__main__":
-    pass

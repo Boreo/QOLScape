@@ -1,18 +1,11 @@
-#main
-class MainConfig:
-    #Locate on window, or by screen. 
-    #Setting to False becomes more stable, however need to ensure OSRS is visible when running. 
-    useWindow = False
-    ## Change this to your RuneLite window title (might have username) if set useWindow = True
-    windowName = "RuneLite"
-
+#TODO: This may be better as YML for user friendliness.
 #autoprayflick
 class AutoPrayFlickConfig:
     #If resizing/moving window, disable and re-enable the script to reset positions
     #Hotkey, Examples:"<ctrl>+<alt>+a", "<shift>+<ctr>+`". 
     #See https://cherrytree.at/misc/vk.htm for special keys Example: <112> for F1
     activeHotkey = "<112>"
-    exitHotkey = "<ctrl>+c"
+    exitHotkey = "<ctrl>+<alt>+c"
     
     #Start already activated
     active = False

@@ -30,25 +30,22 @@ from modules.metronome import Metronomer
 from modules.randomdistribution import randomDelay, clamp
 from modules.pixelcolour import getPixel
 from config import AutoPrayFlickConfig as cfg
-from config import MainConfig as mcfg
+from colorama import init, Fore
 import random, math, threading, copy, pyautogui
 
 #Pretty output
-
-no = ("\033[91m" + "X" + "\033[0m")
-ok = ("\033[92m" + "X" + "\033[0m")
-wait = ("\033[93m" + "x" + "\033[0m")
+init(convert=True)
+no = (Fore.RED + "X" + Fore.WHITE)
+ok = (Fore.GREEN + "X" + Fore.WHITE)
+wait = (Fore.LIGHTYELLOW_EX + "x" + Fore.WHITE)
 
 
 def getOrbLoc():
+    #TODO: Might be better as object and allow to grab just whether orb is active or inactive.
     tries = 0
     while True:
-        if mcfg.useWindow:
-            prayOrbI = pyautogui.locateOnWindow(".\\resources\\prayerBInactive.png", mcfg.windowName, confidence = .8)
-            prayOrbA = pyautogui.locateOnWindow(".\\resources\\prayerBActive.png", mcfg.windowName, confidence = .8)
-        else:
-            prayOrbI = pyautogui.locateOnScreen(".\\resources\\prayerBInactive.png", confidence = .8)
-            prayOrbA = pyautogui.locateOnScreen(".\\resources\\prayerBActive.png", confidence = .8)
+        prayOrbI = pyautogui.locateOnScreen(".\\resources\\prayerBInactive.png", confidence = .8)
+        prayOrbA = pyautogui.locateOnScreen(".\\resources\\prayerBActive.png", confidence = .8)
             
         if prayOrbI != None:
             prayOrbI = pyautogui.center(prayOrbI)
@@ -60,12 +57,12 @@ def getOrbLoc():
             return prayOrbA, False
         else:
             if tries < 5:
-                print("\033[93m" + f"Error finding prayer orb, Trying again in {1+tries} seconds..." + "\033[0m")
+                print(Fore.LIGHTYELLOW_EX + f"Error finding prayer orb, Trying again in {1+tries} seconds..." + Fore.WHITE)
                 sleep(1+tries)
                 tries += 1
                 continue
             else:
-                print("\033[91m" + f"Failed to find prayer orb after {tries} tries, disabling orb tracking" + "\033[0m")
+                print(Fore.RED + f"Failed to find prayer orb after {tries} tries, disabling orb tracking" + Fore.WHITE)
                 return False
                 
 
@@ -73,18 +70,18 @@ def getMetro():
     tries = 0
     while True:
         try:
-            metro = Metronomer(mcfg.windowName)
+            metro = Metronomer()
             metro.getMetronome()
             print(f"Metronome Found.   [{ok}]")
             return metro
         except Metronomer.CouldNotFind:
             if tries < 5:
-                print("\033[93m" + f"Error finding Metronome, Trying again in {1+tries} seconds..." + "\033[0m")
+                print(Fore.LIGHTYELLOW_EX + f"Error finding Metronome, Trying again in {1+tries} seconds..." + Fore.WHITE)
                 sleep(1+tries)
                 tries += 1
                 continue
             else:
-                print("\033[91m" + f"Failed to find Metronome after {tries} tries, exiting" + "\033[0m")
+                print(Fore.RED + f"Failed to find Metronome after {tries} tries, exiting" + Fore.WHITE)
                 sleep(0.1)
                 exit()
      
