@@ -12,21 +12,34 @@ Currently only developed autoprayflick, more to come!
 
 - Install Python libraries using Command Prompt (CMD) or Powershell:
 
-    ```{pip install pynput pyautogui pywin32 Pillow opencv-python}```
+    ```pip install pynput pyautogui pywin32 Pillow opencv-python colorama```
 
 - Run desired script using CMD or Powershell
 
     `python .\autoprayflick.py`
-    
-# Configuration
->`TODO:` This might be better as a YML for user friendliness
 
-Set your variables in `config.py` if you wish to change certain aspects of the scripts such as random distribution etc. This is a python script itself, so formatting should remain the same.
+- Alternatively, install PyCharm or VSC with python plugins, plenty of guides on the internet to set these up.
+
+# Configuration
+Set your variables and hotkeys in `config.py` if you wish to change certain aspects of the scripts such as random distribution etc. This is a python script itself, so formatting should remain the same.
+
+Make sure you save this before running any script!
 
 
 # Auto Pray Flick
 Flicks quick prayer when mouse is hovering over the prayer orb. 
 ## Setup
-- From RuneLite's plugin-hub install `Visual Metronome`.  The location of the metronome should be visible when starting the script. Make sure `tick number` is `ticked` and `tick count` is set to `1` and tick number colour is set to `000000`.
+- From RuneLite's plugin-hub install `Visual Metronome`.  The location of the metronome should be visible when starting the script. Make sure `tick number` is set `ticked` and `tick count` is set to `1` and tick number colour is set to `000000`.
  >Note: The colours of the metronome shouldn't matter as its using greyscale, although these are the settings I've tested.
-https://user-images.githubusercontent.com/7530279/178341650-31d07e37-9ca6-4a7d-9385-105687570fe7.mp4
+
+ ![image](https://user-images.githubusercontent.com/7530279/178334449-b69fd3c5-b180-4c03-9879-d779bc8d7562.png)
+
+- Run the script from CMD or Powershell
+
+    `python .\autoprayflick.py`
+
+- Disable/Enable the script with the hotkey (Default = `F1`) and exit using the hotkey (Default = `ctr+alt+c`)
+
+- Hover mouse over prayer orb! The script will pause when mouse is outside the orb, and flick when inside. It will also check if prayer is enabled on its first click when the script is run, and if disabled, enables prayer.
+
+https://user-images.githubusercontent.com/7530279/178342023-3b65d532-262f-4b2b-bf85-020a16ef5241.mov
