@@ -30,6 +30,8 @@ Make sure you save this before running any script!
 
 ## Auto Pray Flick
 
+https://user-images.githubusercontent.com/7530279/178342764-22d9a30b-bdc8-4e22-a4c5-83109dccc47d.mp4
+
 Flicks quick prayer when mouse is hovering over the prayer orb. 
 
 ### Setup
@@ -49,4 +51,3 @@ From RuneLite's plugin-hub install **Visual Metronome**  The location of the met
 
 - Hover mouse over prayer orb! The script will pause when mouse is outside the orb, and flick when inside. It will also check if prayer is enabled on its first click when the script is run, and if disabled, enables prayer.
 
-https://user-images.githubusercontent.com/7530279/178342764-22d9a30b-bdc8-4e22-a4c5-83109dccc47d.mp4
