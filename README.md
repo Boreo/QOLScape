@@ -3,7 +3,7 @@ Scripts to assist regular gameplay of OldSchool RuneScape (OSRS) with minimal ri
 
 Windows compatability only, tested working on python v3.10.5
 
-Currently only developed autoprayflick, more to come!
+Currently only developed autoprayflick, have more ideaas such as item dropper, never log & more.
 
 # Setup
 - Download and install Python - https://www.python.org/downloads/
@@ -42,4 +42,4 @@ Flicks quick prayer when mouse is hovering over the prayer orb.
 
 - Hover mouse over prayer orb! The script will pause when mouse is outside the orb, and flick when inside. It will also check if prayer is enabled on its first click when the script is run, and if disabled, enables prayer.
 
-https://user-images.githubusercontent.com/7530279/178342023-3b65d532-262f-4b2b-bf85-020a16ef5241.mov
+https://user-images.githubusercontent.com/7530279/178342764-22d9a30b-bdc8-4e22-a4c5-83109dccc47d.mp4
