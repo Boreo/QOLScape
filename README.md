@@ -1,10 +1,9 @@
 # QOLScape
-
 Scripts to assist regular gameplay of OldSchool RuneScape (OSRS) with minimal risk of a ban as they are designed to be run alongside human interaction.
 
 Windows compatability only, tested working on python v3.10.5
 
-Currently only developed autoprayflick, have more ideaas such as item dropper, never log & more.
+Currently only developed autoprayflick, item dropper, never log & more coming soon!
 
 ## Setup
 
@@ -32,15 +31,15 @@ Make sure you save this before running any script!
 ## Auto Pray Flick
 
 Flicks quick prayer when mouse is hovering over the prayer orb. 
+
 ### Setup
 
-From RuneLite's plugin-hub install `Visual Metronome`.  The location of the metronome should be visible when starting the script. Make sure `tick number` is set `ticked` and `tick count` is set to `1` and tick number colour is set to `000000`.
+From RuneLite's plugin-hub install **Visual Metronome**  The location of the metronome should be visible when starting the script. Make sure ***tick number*** is set `ticked` and ***tick count*** is set to `1` and tick number colour is set to `000000`.
  >Note: The colours of the metronome shouldn't matter as its using greyscale, although these are the settings I've tested.
 
  ![image](https://user-images.githubusercontent.com/7530279/178334449-b69fd3c5-b180-4c03-9879-d779bc8d7562.png)
 
 ### Use
-
 
 - Run the script from CMD or Powershell
 
