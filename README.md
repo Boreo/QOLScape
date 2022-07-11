@@ -1,4 +1,5 @@
 # QOLScape
+
 Scripts to assist regular gameplay of OldSchool RuneScape (OSRS) with minimal risk of a ban as they are designed to be run alongside human interaction.
 
 Windows compatability only, tested working on python v3.10.5
@@ -6,7 +7,7 @@ Windows compatability only, tested working on python v3.10.5
 Currently only developed autoprayflick, have more ideaas such as item dropper, never log & more.
 
 ## Setup
----
+
 - Download and install Python - https://www.python.org/downloads/
 
 - Download pip for Python using tutorial from - https://phoenixnap.com/kb/install-pip-windows
@@ -22,14 +23,14 @@ Currently only developed autoprayflick, have more ideaas such as item dropper, n
 - Alternatively, install PyCharm or VSC with python plugins, plenty of guides on the internet to set these up.
 
 ## Configuration
----
+
 Set your variables and hotkeys in `config.py` if you wish to change certain aspects of the scripts such as random distribution etc. This is a python script itself, so formatting should remain the same.
 
 Make sure you save this before running any script!
 
 
 ## Auto Pray Flick
----
+
 Flicks quick prayer when mouse is hovering over the prayer orb. 
 ### Setup
 
