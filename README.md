@@ -3,7 +3,7 @@ Scripts to assist regular gameplay of OldSchool RuneScape (OSRS) with minimal ri
 
 Windows compatability only, tested working on python v3.10.5
 
-Currently only developed autoprayflick, item dropper, never log & more coming soon!
+Currently only developed autoprayflick.
 
 ## Setup
 
