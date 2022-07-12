@@ -55,20 +55,23 @@ class Metronomer():
     def getColour(self):
         return self.colour
     
-    def getMetronome(self):
+    def getMetronome(self, onlyLoc = False):
         flick1 = pyautogui.locateOnScreen(".\\resources\\flick1.png", grayscale = True, confidence = .8)
         flick2 = pyautogui.locateOnScreen(".\\resources\\flick2.png", grayscale = True, confidence = .8)
             
         if flick1 != None:
             self.x = flick1[0]
             self.y = flick1[1]
-            self._findMetroColour(self.x, self.y)
+            if not onlyLoc:
+                self._findMetroColour(self.x, self.y)
         elif flick2 != None:
             self.x = flick2[0]
             self.y = flick2[1]
-            self._findMetroColour(self.x, self.y)
+            if not onlyLoc:
+                self._findMetroColour(self.x, self.y)
         else:
             raise self.CouldNotFind("Could not find metronome location")
+        
 
     def _findMetroColour(self, x, y):
         timeout = time() + 5

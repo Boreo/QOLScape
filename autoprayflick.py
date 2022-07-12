@@ -23,9 +23,9 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                      
 ####################
 
-from time import sleep
+from time import sleep, time
 from pynput.keyboard import GlobalHotKeys
-from sys import exit
+from sys import exit, stdout
 from modules.metronome import Metronomer
 from modules.randomdistribution import randomDelay, clamp
 from modules.pixelcolour import getPixel
@@ -40,50 +40,66 @@ ok = (Fore.GREEN + "X" + Fore.WHITE)
 wait = (Fore.LIGHTYELLOW_EX + "x" + Fore.WHITE)
 
 
-def getOrbLoc():
+def getOrb():
     #TODO: Might be better as object and allow to grab just whether orb is active or inactive.
-    tries = 0
+    timeout = time() + 5
+    notify = False 
     while True:
         prayOrbI = pyautogui.locateOnScreen(".\\resources\\prayerBInactive.png", confidence = .8)
         prayOrbA = pyautogui.locateOnScreen(".\\resources\\prayerBActive.png", confidence = .8)
             
         if prayOrbI != None:
             prayOrbI = pyautogui.center(prayOrbI)
-            print(f"Prayer orb Found.  [{ok}]")
+            if notify:
+                print(f"Pray Orb Found     [{ok}]")
             return prayOrbI, True
         elif prayOrbA != None:
             prayOrbA = pyautogui.center(prayOrbA)
-            print(f"Prayer orb Found.  [{ok}]")
+            if notify:
+                print(f"Pray Orb Found     [{ok}]")
             return prayOrbA, False
         else:
-            if tries < 5:
-                print(Fore.LIGHTYELLOW_EX + f"Error finding prayer orb, Trying again in {1+tries} seconds..." + Fore.WHITE)
-                sleep(1+tries)
-                tries += 1
-                continue
-            else:
-                print(Fore.RED + f"Failed to find prayer orb after {tries} tries, disabling orb tracking" + Fore.WHITE)
+            if time() > timeout:
+                print(Fore.RED + "Failed to find Prayer Orb after 5 seconds, disabling orb tracking" + Fore.WHITE)
                 return False
+            else:
+                print(Fore.LIGHTYELLOW_EX + "Finding Pray Orb..." + Fore.WHITE)
+                notify = True
+                continue
                 
 
+def updateMetroLoc():
+    global metro
+    timeout = time() + 5
+    while True:
+        try:
+            return metro.getMetronome(onlyLoc = True)
+        except Metronomer.CouldNotFind:
+            if time() > timeout:
+                print(Fore.RED + "Failed to find Metronome after 5 seconds, exiting." + Fore.WHITE, end="\r")
+                sleep(.1)
+                exit()
+            else:
+                print(Fore.LIGHTYELLOW_EX + "Finding Metronome..." + Fore.WHITE)
+                continue
+            
+
 def getMetro():
-    tries = 0
+    timeout = time() + 5
     while True:
         try:
             metro = Metronomer()
             metro.getMetronome()
-            print(f"Metronome Found.   [{ok}]")
+            print(f"Metronome Found    [{ok}]")
             return metro
         except Metronomer.CouldNotFind:
-            if tries < 5:
-                print(Fore.LIGHTYELLOW_EX + f"Error finding Metronome, Trying again in {1+tries} seconds..." + Fore.WHITE)
-                sleep(1+tries)
-                tries += 1
-                continue
-            else:
-                print(Fore.RED + f"Failed to find Metronome after {tries} tries, exiting" + Fore.WHITE)
-                sleep(0.1)
+            if time() > timeout:
+                print(Fore.RED + "Failed to find Metronome after 5 seconds, exiting." + Fore.WHITE)
+                sleep(.1)
                 exit()
+            else:
+                print(Fore.LIGHTYELLOW_EX + "Finding Metronome..." + Fore.WHITE)
+                continue
      
 
 def main():
@@ -96,8 +112,8 @@ def main():
     Tar += random.uniform(-cfg.tarVariance,cfg.tarVariance)
     clamp(Tar-cfg.tarVariance, Tar+cfg.tarVariance, Tar)
     #Get metronome and orb locations
-    metro = getMetro()
-    orbLoc, isInactive = getOrbLoc()
+    updateMetroLoc()
+    orbLoc, isInactive = getOrb()
     print(f"Ready              [{ok}]")
     
     while True:   
@@ -108,6 +124,8 @@ def main():
             if math.dist(mousePos,orbLoc) >= cfg.disableRange and inside:
                 print(f"Outside Orb        [{wait}]")
                 inside = False
+                firstClick = True
+                orbLoc, isInactive = getOrb()
                 
             if  math.dist(mousePos,orbLoc) <= cfg.disableRange and not inside:
                 print(f"Inside Orb         [{ok}]")
@@ -116,18 +134,22 @@ def main():
             if currentColour in metro.colour[0] and inside and firstClick:
                 if isInactive:
                     pyautogui.click()
-                    sleep(.6)
                     firstClick = False
                 else:
                     firstClick = False
+                #Waits a tick to avoid spazzing out.
+                if currentColour == metro.colour[0]:
+                    toggle = False
+                else:
+                    toggle = True
             
-            if  currentColour == metro.colour[0] and toggle and inside and not firstClick:
+            if  currentColour == metro.colour[0] and inside and toggle and not firstClick:
                 sleep(randomDelay(cfg.minDelay,cfg.maxDelay,cfg.Dev,Tar,cfg.weighted))
                 pyautogui.click(clicks=2, 
                                 interval=randomDelay(cfg.flickMinDelay,cfg.flickMaxDelay,cfg.flickDev,cfg.flickTar,cfg.weighted))
                 toggle = False
                     
-            elif currentColour == metro.colour[1] and not toggle and inside and not firstClick:
+            elif currentColour == metro.colour[1] and inside and not toggle and not firstClick:
                 sleep(randomDelay(cfg.minDelay,cfg.maxDelay,cfg.Dev,Tar,cfg.weighted))
                 pyautogui.click(clicks=2, 
                                 interval=randomDelay(cfg.flickMinDelay,cfg.flickMaxDelay,cfg.flickDev,cfg.flickTar,cfg.weighted))
@@ -156,6 +178,7 @@ def leave():
 
 if __name__ == "__main__":
     active = cfg.active
+    metro = getMetro()
     print(f"Loaded             [{ok}]")
     with GlobalHotKeys({cfg.activeHotkey: activate, cfg.exitHotkey: leave}) as h:
         h.join()
