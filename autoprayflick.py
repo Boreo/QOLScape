@@ -69,7 +69,6 @@ def getOrb():
                 
 
 def updateMetroLoc():
-    global metro
     timeout = time() + 5
     while True:
         try:
