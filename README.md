@@ -49,5 +49,5 @@ From RuneLite's plugin-hub install **Visual Metronome**  The location of the met
 
 - Disable/Enable the script with the hotkey (Default = `F1`) and exit using the hotkey (Default = `ctr+alt+c`)
 
-- Hover mouse over prayer orb! The script will pause when mouse is outside the orb, and flick when inside. It will also check if prayer is enabled on its first click when the script is run, and if disabled, enables prayer.
+- Hover mouse over prayer orb! The script will pause when mouse is outside the orb, and flick when inside. It will also check if prayer is enabled on its first click, and if disabled, enables prayer.
 
