@@ -14,6 +14,8 @@ Currently only developed autoprayflick.
 - Install Python libraries using Command Prompt (CMD) or Powershell:
 
     ```pip install pynput pyautogui pywin32 Pillow opencv-python colorama```
+    
+- Clone or download the project from https://github.com/Boreo/QOLScape/archive/refs/heads/main.zip
 
 - Run desired script using CMD or Powershell
 
