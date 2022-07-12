@@ -9,8 +9,8 @@ class AutoPrayFlickConfig:
     
     #Start already activated
     active = False
-    #Size of orb area, 25 should be perfect
-    disableRange = 25       
+    #Size of orb area, 20 should be perfect
+    disableRange = 20       
     
     ##Random Distribtions##
     #If distrubtions should be weighted
